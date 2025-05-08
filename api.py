@@ -29,6 +29,6 @@ def get_item_by_code(code: str):
 
             columns = [desc[0] for desc in con.description]
             item = dict(zip(columns, result[0]))
-            return {"item": item}
+            return item
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
