@@ -17,20 +17,18 @@ def get_database():
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
 
-@app.get("/database/{codes:path}")
-def get_items_by_codes(codes: str):
+@app.get("/database/{code}")
+def get_item_by_code(code: str):
     try:
-        code_list = codes.split("/")  # Split the codes into a list
         with duckdb.connect(DB_PATH, read_only=True) as con:
-            # Query for multiple codes using the IN clause
-            query = f"SELECT * FROM enumbers WHERE code IN ({','.join(['?'] * len(code_list))})"
-            result = con.execute(query, tuple(code_list)).fetchall()
+            query = "SELECT * FROM enumbers WHERE code = ?"
+            result = con.execute(query, (code,)).fetchall()
 
             if not result:
-                raise HTTPException(status_code=404, detail="Items not found")
+                raise HTTPException(status_code=404, detail="Item not found")
 
             columns = [desc[0] for desc in con.description]
-            items = [dict(zip(columns, row)) for row in result]
-            return {"items": items}
+            item = dict(zip(columns, result[0]))
+            return item
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
