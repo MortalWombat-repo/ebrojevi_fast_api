@@ -4,7 +4,7 @@ import duckdb
 
 app = FastAPI()
 
-DB_PATH = "db/enumbers.duckdb"
+DB_PATH = "db/enumbers_db.duckdb"
 
 @app.get("/database")
 def get_database():
