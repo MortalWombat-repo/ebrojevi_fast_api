@@ -13,7 +13,7 @@ def get_database():
             result = con.execute("SELECT * FROM enumbers").fetchall()
             columns = [desc[0] for desc in con.description]
             database = [dict(zip(columns, row)) for row in result]
-            return {"database": database}
+            return database
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
 
@@ -31,7 +31,7 @@ def get_items_by_codes(codes: str):
 
             columns = [desc[0] for desc in con.description]
             items = [dict(zip(columns, row)) for row in result]
-            return {"items": items}
+            return items
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
     
