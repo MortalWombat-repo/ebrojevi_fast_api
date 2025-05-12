@@ -10,6 +10,10 @@ DB_PATH = "db/enumbers_db.duckdb"
 class ENumber(BaseModel):
     code: str
     name: str
+    description: str
+    type: str
+    adi: str
+    color: str
 
 @app.get("/database", response_model=list[ENumber])
 def get_database():
