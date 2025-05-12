@@ -38,4 +38,11 @@ def get_items_by_codes(codes: str):
             return items
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
+
+@app.get("/test")
+def test_response():
+    return [
+        {"code": "E100", "name": "Test"},
+        {"code": "E101", "name": "Test 2"}
+    ]
     
