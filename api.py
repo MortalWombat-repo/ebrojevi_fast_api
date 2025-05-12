@@ -52,6 +52,20 @@ def get_items_by_codes(codes: str):
 @app.get("/test", response_model=list[ENumber])
 def test_response():
     return [
-        {"code": "E100", "name": "Test"},
-        {"code": "E101", "name": "Test 2"}
+        {
+            "code": "E100",
+            "name": "Test",
+            "description": "Test description",
+            "type": "Test type",
+            "adi": "Test adi",
+            "color": "Green"
+        },
+        {
+            "code": "E101",
+            "name": "Test 2",
+            "description": "Another description",
+            "type": "Test type",
+            "adi": "Test adi",
+            "color": "Yellow"
+        }
     ]
