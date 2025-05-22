@@ -1,9 +1,19 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware  # ✅ Added for CORS
 from pydantic import BaseModel
 import duckdb
 
 app = FastAPI()
+
+# ✅ Add CORS middleware (adjust origins as needed)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Replace with ["http://localhost:3000"] in production
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 DB_PATH = "db/enumbers_db.duckdb"
 
